@@ -107,15 +107,12 @@ python .\base.py -i ./file/jp-test-1.wav -m "kuon-1000-(default40k)-w"
 
 七海千秋原音：
 
-<audio controls>
-  <source src="./file/jp-test-1.wav" type="audio/mpeg">
-</audio>
+[s1.webm](https://github.com/lissettecarlr/voice-morph/assets/16299917/08023e5a-bd3c-4656-8118-b751bdec6ab1)
+
 
 久远模型输出：
 
-<audio controls>
-  <source src="./file/jp-test-1_rvc.wav" type="audio/mpeg">
-</audio>
+[s2.webm](https://github.com/lissettecarlr/voice-morph/assets/16299917/3abbed0b-0d2f-45d3-82c1-968cd31f044c)
 
 
 ### base web使用
