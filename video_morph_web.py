@@ -34,7 +34,7 @@ def data_init():
         st.session_state['uvr_1'] = None
     if st.session_state.uvr_1 is None:
         uvr_1_model_name = os.getenv('uvr_1_model_name')
-        print("加载模型：{}".format(uvr_1_model_name))   
+        #print("加载模型：{}".format(uvr_1_model_name))   
         st.session_state.uvr_1 = UvrClient(model_name=uvr_1_model_name)
 
     # if "uvr_2" not in st.session_state:
@@ -49,7 +49,7 @@ def data_init():
     if "rvc_model_name" not in st.session_state:
         st.session_state['rvc_model_name'] = st.session_state['rvc_model_list'][0]
     if st.session_state.rvc_client is None:  
-        print("加载模型：{}".format(st.session_state['rvc_model_name']))
+        #print("加载模型：{}".format(st.session_state['rvc_model_name']))
         st.session_state.rvc_client = RvcBase(st.session_state.rvc_model_name)
         
     # 变调值

@@ -8,15 +8,33 @@ import torch
 
 from dotenv import load_dotenv
 load_dotenv()
-DEFAULT_UVR_MODEL_FOLDER = os.getenv("./models/uvr")
+DEFAULT_UVR_MODEL_FOLDER = os.getenv("weight_uvr5_root")
 
 class UvrClient:
     def __init__(self, model_name, model_file_dir=DEFAULT_UVR_MODEL_FOLDER, output_dir="./temp", sample_rate=44000) -> None:
+
+
+        vr_params={"batch_size": 8,  # 批处理大小 值越大将会消耗更多的内存
+                   "window_size": 512, # 平衡质量和速度。1024=速度快但质量较低，320=速度慢但质量更好
+                   "aggression": 5, # 主要音轨提取的强度，范围为-100到100。通常5适用于人声和乐器
+                   "enable_tta": False, # 启用测试时增强；速度较慢但提高质量
+                   "enable_post_process": False,  # 识别人声输出中的残留伪影；可能改善某些歌曲的分离效果
+                   "post_process_threshold": 0.2,  # 后处理功能的阈值：0.1-0.3
+                   "high_end_process": False} # 镜像输出的缺失频率范围
+        
+        mdx_params={"hop_length": 1024, 
+                    "segment_size": 256, # 控制处理段的大小。值越大，消耗的资源越多，但可能会得到更好的结果
+                    "overlap": 0.25, # 控制预测窗口之间的重叠量，取值范围为0.001到0.999。值越高，效果越好，但速度会变慢
+                    "batch_size": 1, # 批处理大小。值越大，消耗的内存越多
+                    "enable_denoise": False}
+
         self.model = Separator(log_level=logging.WARN,
                                model_file_dir=model_file_dir,
                                output_dir=output_dir,
                                sample_rate=sample_rate,
-                               output_format="WAV")
+                               output_format="WAV",
+                               vr_params= vr_params,
+                               mdx_params=mdx_params)
         # 搜索模型文件夹model_file_dir，找到后缀为pth或者onnx的文件
         self.models_list = []
         for file in os.listdir(model_file_dir):

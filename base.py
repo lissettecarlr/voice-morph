@@ -51,11 +51,13 @@ class RvcBase:
             logger.info(f"{output_audio_path} 已存在，删除旧文件")
             os.remove(output_audio_path)
                 
-        tgt_sr, audio_opt, times, _ = self.rvc_client.vc_single(
+
+        tgt_sr, audio_opt, times, _ = self.rvc_client.vc_inference(
             sid=1,
-            input_audio_path=Path(input_audio_path),
-            f0_up_key=pitch_shift  # 0 # 
+            input_audio_path = Path(input_audio_path),
+            f0_up_key = pitch_shift
         )
+
         wavfile.write(output_audio_path, tgt_sr, audio_opt)
         logger.info("RVC 变声结束：{}".format(output_audio_path))
         return output_audio_path

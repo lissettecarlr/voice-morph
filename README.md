@@ -5,9 +5,9 @@
 改变的只是音色，而不是说话的习惯。
 
 
-## 环境
+## 1 环境
 
-### base
+### 1.1 base
 
 1. 安装Pytorch及其核心依赖，若已安装则跳过。参考自: https://pytorch.org/get-started/locally/
 2. 安装依赖包
@@ -43,7 +43,7 @@
         下载个[exe](https://ffmpeg.org/)后添加到环境变量中
 
 
-### 清洁音频
+### 1.2 清洁音频
 
 想要好的效果则需要输入干净的音频，也就是仅仅只有说话的语音。可以通过[Ultimate Vocal Remover](https://ultimatevocalremover.com/)进行处理，也可以通过本仓库的工具，需要下列安装下列环境。
 
@@ -70,9 +70,9 @@ models
 ```
 
 
-## 使用
+## 2 使用
 
-### 清洁音频
+### 2.1 清洁音频
 
 该功能用于人声伴奏分离
 
@@ -88,8 +88,9 @@ python uvr.py --model_name="UVR-De-Echo-Aggressive.pth" --audio="./file/cn-test.
 * output_dir 输出目录
 * sample_rate 音频的采样率
 
+如果在进行分离时报错，说内存不足，可以到`uvr.py`中修改`batch_size`参数往小调。
 
-### base 命令行
+### 2.2 base 命令行
 
 通过命令行使用基础变声服务
 
@@ -115,7 +116,7 @@ python .\base.py -i ./file/jp-test-1.wav -m "kuon-1000-(default40k)-w"
 [s2.webm](https://github.com/lissettecarlr/voice-morph/assets/16299917/3abbed0b-0d2f-45d3-82c1-968cd31f044c)
 
 
-### base web使用
+### 2.3 base web使用
 
 通过web界面使用基础变声服务
 
@@ -123,7 +124,7 @@ python .\base.py -i ./file/jp-test-1.wav -m "kuon-1000-(default40k)-w"
 streamlit run base_web.py  --server.port 1234 --server.maxUploadSize 1000
 ```
 
-### 视频变声 命令行
+### 2.4 视频变声 命令行
 
 需要安装基础环境和清洁音频环境
 
@@ -137,7 +138,7 @@ python video_morph.py -i ./file/test.mp4 -o ./temp/output -m "kuon-1000-(default
 * -m 模型名（可选）默认模型在.env中修改
 
 
-### 视频变声 web使用
+### 2.5 视频变声 web使用
 
 ```bash
 streamlit run video_morph_web.py  --server.port 1234 --server.maxUploadSize 1000

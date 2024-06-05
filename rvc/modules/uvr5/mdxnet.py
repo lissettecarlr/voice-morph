@@ -1,7 +1,5 @@
-import os
 import logging
-
-logger = logging.getLogger(__name__)
+import os
 
 import librosa
 import numpy as np
@@ -10,6 +8,8 @@ import torch
 from tqdm import tqdm
 
 cpu = torch.device("cpu")
+
+logger: logging.Logger = logging.getLogger(__name__)
 
 
 class ConvTDFNetTrim:
@@ -225,7 +225,7 @@ class Predictor:
                 if os.path.exists(opt_path_vocal):
                     try:
                         os.remove(path_vocal)
-                    except:
+                    except Exception:
                         pass
             if os.path.exists(path_other):
                 os.system(
@@ -234,7 +234,7 @@ class Predictor:
                 if os.path.exists(opt_path_other):
                     try:
                         os.remove(path_other)
-                    except:
+                    except Exception:
                         pass
 
 
@@ -243,7 +243,7 @@ class MDXNetDereverb:
         self.onnx = "assets/uvr5_weights/onnx_dereverb_By_FoxJoy"
         self.shifts = 10  # 'Predict with randomised equivariant stabilisation'
         self.mixing = "min_mag"  # ['default','min_mag','max_mag']
-        self.chunks = chunks
+        self.chunks = chunks  # 15
         self.margin = 44100
         self.dim_t = 9
         self.dim_f = 3072
