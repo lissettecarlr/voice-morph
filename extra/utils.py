@@ -261,6 +261,30 @@ def sanitize_filename(filename):
     filename = filename.rstrip('. ')
     return filename
 
+
+def merge_audio_files(output_file, *input_files):
+    """
+    将多个音频文件融合到一个音频文件中。
+
+    参数:
+    output_file (str): 输出文件路径。
+    *input_files (str): 多个输入文件路径。
+    """
+    if len(input_files) < 2:
+        raise ValueError("至少需要两个输入文件进行融合")
+
+    # 创建输入流，并调整每个输入音频的音量
+    inputs = [ffmpeg.input(file).filter('volume', volume=1.0/len(input_files)) for file in input_files]
+
+    # 使用amix滤镜融合音频
+    merged = ffmpeg.filter(inputs, 'amix', inputs=len(input_files), dropout_transition=0)
+
+    # 在输出之前增加音量提升
+    boosted = merged.filter('volume', volume=len(input_files) *2)  # 这里的提升倍数可以根据需要调整
+
+    # 输出到文件
+    ffmpeg.output(boosted, output_file).run()
+
 if __name__ == "__main__":
     #concat_videos("./temp/filelist.txt","./temp/1111.mp4")
     #extract_audio_from_folder(r"C:\Users\lisse\Desktop\徐老师")
@@ -270,6 +294,9 @@ if __name__ == "__main__":
 
     # 循环切割视频
     # loop_crop_video(source_folder="./temp/source", output_folder="./temp/output")
-
-    # 测试函数
-    print(is_same_file("../file/cn-test-1.wav", "../cn-test-1.wav"))
+    
+    input_files = ['../temp/jp-music_(Instrumental)_UVR_MDXNET_Main.wav', 
+                   '../temp/jp-music_(Vocals)_UVR_MDXNET_Main_(Instrumental)_UVR-De-Echo-Aggressive.wav', 
+                   '../temp/jp-music_(Vocals)_UVR_MDXNET_Main_(No Echo)_UVR-De-Echo-Aggressive_rvc.wav']
+    output_file = '../temp/output/out.wav'
+    merge_audio_files(output_file, *input_files)

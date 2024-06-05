@@ -143,3 +143,11 @@ python video_morph.py -i ./file/test.mp4 -o ./temp/output -m "kuon-1000-(default
 ```bash
 streamlit run video_morph_web.py  --server.port 1234 --server.maxUploadSize 1000
 ```
+
+
+### 2.6 歌曲变声 命令行
+
+```bash
+CUDA_VISIBLE_DEVICES=0
+python .\music_morph.py -i ./file/jp-music.mp3 -m "kuon-1000-(default40k)-w" -o ./temp/output
+```
