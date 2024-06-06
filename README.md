@@ -14,6 +14,14 @@
     ```bash
     pip install -r requirements.txt
     ```
+    安装fairseq
+    ```bash
+    git clone https://github.com/pytorch/fairseq
+    cd fairseq
+    pip install --editable ./
+    ```
+
+
 3. 下载模型，所以模型都被保存在models文件夹中
     下列模型放在models根目录
 

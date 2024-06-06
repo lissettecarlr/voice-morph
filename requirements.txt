@@ -1,0 +1,15 @@
+streamlit
+python-dotenv
+scipy
+librosa
+faiss-cpu
+pyworld
+onnxruntime
+av==11.0.0
+ffmpeg-python
+PyYAML
+torchcrepe
+onnxruntime-gpu
+soundfile
+praat-parselmouth
+
