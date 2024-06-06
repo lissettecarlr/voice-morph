@@ -1,7 +1,7 @@
+fairseq
 streamlit
 python-dotenv
 scipy
-librosa
 faiss-cpu
 pyworld
 onnxruntime
@@ -12,4 +12,4 @@ torchcrepe
 onnxruntime-gpu
 soundfile
 praat-parselmouth
-
+librosa

@@ -155,10 +155,21 @@ python video_morph.py -i ./file/test.mp4 -o ./temp/output -m "kuon-1000-(default
 streamlit run video_morph_web.py  --server.port 1234 --server.maxUploadSize 1000
 ```
 
+### 2.6 视频变声 web docker
 
-### 2.6 歌曲变声 命令行
+生成镜像
+```bash
+docker build -t voice-morph .
+```
+
+运行容器
+```bash
+sudo docker run --runtime=nvidia -d -e NVIDIA_VISIBLE_DEVICES=0 -p 22222:22222 -v $(pwd)/:/workspace --name voice-morph voice-morph
+```
+
+### 2.7 歌曲变声 命令行
 
 ```bash
 CUDA_VISIBLE_DEVICES=0
-python .\music_morph.py -i ./file/jp-music.mp3 -m "kuon-1000-(default40k)-w" -o ./temp/output
+python music_morph.py -i ./file/jp-music.mp3 -m "kuon-1000-(default40k)-w" -o ./temp/output
 ```
