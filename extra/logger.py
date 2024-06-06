@@ -54,6 +54,7 @@ def setup_logger(log_file,logger_name="app"):
     logger.addHandler(console_handler)
 
     logging.getLogger('numba').setLevel(logging.WARNING)
+    logging.getLogger('watchdog').setLevel(logging.WARNING)
 
     return logger
 

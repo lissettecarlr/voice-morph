@@ -1,6 +1,4 @@
 # 该代码用于批量转换
-
-
 import os
 from pathlib import Path
 from extra.logger import setup_logger
@@ -72,3 +70,11 @@ def batch_video_morph_from_excel(excelfile,output_folder_path,model_name=None,pi
                 with open(error_log_path, "a") as file:
                     file.write(f"{index}\n")  
                 continue
+
+if __name__ == '__main__':
+    excel_list = [
+        "./temp/资源.xlsx",
+    ]
+    for excel_path in excel_list:
+        logger.info("表格文件：{}".format(excel_path))
+        batch_video_morph_from_excel(excel_path)   
