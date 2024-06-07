@@ -11,19 +11,9 @@
 
 1. 安装Pytorch及其核心依赖，若已安装则跳过。参考自: https://pytorch.org/get-started/locally/
 2. 安装依赖包
-    * 安装fairseq
-        ```bash
-        git clone https://github.com/pytorch/fairseq
-        cd fairseq
-        pip install --editable ./
-        ```
-    * 其他
     ```bash
     pip install -r requirements.txt
     ```
-
-
-
 
 3. 下载模型，所以模型都被保存在models文件夹中
     下列模型放在models根目录
